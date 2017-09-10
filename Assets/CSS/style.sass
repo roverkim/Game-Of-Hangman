@@ -1,0 +1,85 @@
+*
+  padding: 0
+  margin: 0
+  font-size: 100%
+  line-height: 1
+
+@mixin grid ($columns, $rows, $area)
+  grid-template-columns: $columns
+  grid-template-rows: $rows
+  grid-template-areas: $area
+
+// Vertical Center Line Item Mixin
+@mixin vertical_center_line
+  justify-self: center
+  align-self: center
+
+body
+  display: grid
+  grid-template-columns: 0.5fr 8fr 0.5fr
+  grid-template-rows: 0.5fr 1fr 5fr 3fr 3fr 3fr 5fr 0.5fr
+  grid-template-areas: ". . ." ". header ." ". hangman . " ". guessed ." ". guesses ." ". scores ." ". gif_Section . "
+  grid-row-gap: 32px
+  height: 100vh
+  width: 100wh
+  background: url(../Img/snow.gif)
+  background-repeat: no-repeat
+  background-size: cover
+
+
+  #header
+    grid-area: header
+    display: grid
+    width: 100%
+    .header_Img
+      @include vertical_center_line
+      height: auto
+
+
+
+  #hangman
+    grid-area: hangman
+    display: grid
+    @include grid($columns: 1fr 1fr, $rows: 1fr, $area: "top_Img_Left top_Img_Right")
+    border: 1px solid black
+
+    .top_Img_Left
+      display: grid
+      grid-area: top_Img_Left
+      border-right: 1px solid black
+      .hangman_Img
+        height: 100%
+        width: auto
+        @include vertical_center_line
+
+    .top_Img_Right
+      display: grid
+      grid-area: top_Img_Right
+      .guesses_Img
+        @include vertical_center_line
+        height: 100%
+        width: auto
+
+
+  #guessed
+    grid-area: guessed
+    border: 1px solid black
+    .guessed_Container
+      height: 70%
+      width: 5%
+      border: 1px black solid
+      margin: 10px
+  #guesses
+    grid-area: guesses
+    border: 1px solid black
+  #scores
+    grid-area: scores
+    border: 1px solid black
+  #gif_Section
+    grid-area: gif_Section
+    border: 1px solid black
+    display: grid
+    .changing_Gifs
+      height: auto
+      width: auto
+      @include vertical_center_line

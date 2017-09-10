@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hangman Game</title>
+  <link rel="stylesheet" href="Assets/CSS/style.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Hangman Images -->
+  <!-- Header -->
+  <section id = "header">  <img src="Assets/Img/Logo.png" alt="Logo" class="header_Img" > </section>
+    <section id="hangman">
+      <!-- Changing Hangman Image Left -->
+      <div class = "top_Img_Left" >
+        <img src="Assets/Img/tumble_weed.gif" alt="Hangman" class = "hangman_Img">
+      </div>
+      <!-- Changing Image of Guesses Right -->
+      <div class = "top_Img_Right" >
+        <img src="Assets/Img/gotOpening.gif" alt="Right and Wrong" class = "guesses_Img">
+      </div>
+    </section>
+  <!-- Letters Guessed  -->
+    <section id="guessed">
+      <!-- Letter Guesses -->
+      <div class="guessed_Container">
+        <!-- Has Padding and a Lower Border -->
+        <p class = "letters_Guessed"></p>
+      </div>
+    </section>
+  <!-- Guesses -->
+    <section id="guesses">
+      <!-- Top container -->
+      <div class = "guesses_Section">
+        <!-- Container containing the letter -->
+        <div class="letter_Guesses_Container">
+        <!-- Has Padding and a Lower Border -->
+          <p class ="lette_Guesses"></p>
+        </div>
+      </div>
+      <!-- Lower Container -->
+      <div class = "hints_Section">
+        <!-- Contianer containing the hints -->
+        <div class="hints_Container">
+          <!-- Hint Phrases -->
+          <p class = "hints"></p>
+        </div>
+      </div>
+    </section>
+
+  <!-- Win and Losses -->
+  <section id ="scores">
+    <!-- Wins to the left -->
+    <div class="wins">
+      <div class="wins_Container">
+        <p class="wins_Score"></p>
+      </div>
+    </div>
+    <!-- loss to the right -->
+    <div class="loss">
+      <div class="loss_Container">
+        <p class="loss_Score"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gif Image -->
+  <section id="gif_Section">
+    <img src="Assets/Img/johnsnow.gif" alt="Game of Thrones" class = "changing_Gifs">
+  </section>
+</body>
+</html>
