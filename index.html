@@ -12,63 +12,67 @@
   <!-- Hangman Images -->
   <!-- Header -->
   <section id = "header">  <img src="Assets/Img/Logo.png" alt="Logo" class="header_Img" > </section>
-    <section id="hangman">
+
+<!-- LEFT -->
+  <section id = "left_Column">
+    <div id="hangman">
       <!-- Changing Hangman Image Left -->
-      <div class = "top_Img_Left" >
-        <img src="Assets/Img/tumble_weed.gif" alt="Hangman" class = "hangman_Img">
-      </div>
+      <p class = "title_Hangman"> Hangman </p>
+      <div class = "top_Img" ></div>
       <!-- Changing Image of Guesses Right -->
-      <div class = "top_Img_Right" >
-        <img src="Assets/Img/gotOpening.gif" alt="Right and Wrong" class = "guesses_Img">
-      </div>
-    </section>
+      <p class = "title_Reaction"> Reactions </p>
+      <div class = "bottom_Img" > </div>
+    </div>
+  </section>
+
+<!-- RIGHT -->
+  <section id="right_Column">
+
+<!-- Row 1 -->
+    <!-- Win and Losses -->
+    <div id ="scores_Section">
+      <!-- Wins to the left -->
+        <div class="wins_Container">
+          <p class="wins_Score"></p>
+        </div>
+      <!-- loss to the right -->
+        <div class="loss_Container">
+          <p class="loss_Score"></p>
+        </div>
+    </div>
+
+<!-- Row 2 -->
+    <!-- Hints -->
+    <div class = "hints_Section">
+       <!-- Contianer containing the hints -->
+       <div class="hints_Container">
+        <!-- Hint Phrases -->
+         <p class = "hints"></p>
+         <img src="Assets/Img/johnsnow.gif" alt="Game of Thrones" class = "changing_Gifs">
+       </div>
+    </div>
+
+<!-- Row 3 -->
   <!-- Letters Guessed  -->
-    <section id="guessed">
-      <!-- Letter Guesses -->
+    <div id="guessed_Section">
+       <!-- Letter Guesses -->
       <div class="guessed_Container">
-        <!-- Has Padding and a Lower Border -->
-        <p class = "letters_Guessed"></p>
+         <!-- Has Padding and a Lower Border -->
+        <p class = "letters_Guessed">A</p>
       </div>
-    </section>
-  <!-- Guesses -->
-    <section id="guesses">
-      <!-- Top container -->
-      <div class = "guesses_Section">
-        <!-- Container containing the letter -->
-        <div class="letter_Guesses_Container">
-        <!-- Has Padding and a Lower Border -->
-          <p class ="lette_Guesses"></p>
-        </div>
-      </div>
-      <!-- Lower Container -->
-      <div class = "hints_Section">
-        <!-- Contianer containing the hints -->
-        <div class="hints_Container">
-          <!-- Hint Phrases -->
-          <p class = "hints"></p>
-        </div>
-      </div>
-    </section>
+     </div>
 
-  <!-- Win and Losses -->
-  <section id ="scores">
-    <!-- Wins to the left -->
-    <div class="wins">
-      <div class="wins_Container">
-        <p class="wins_Score"></p>
-      </div>
-    </div>
-    <!-- loss to the right -->
-    <div class="loss">
-      <div class="loss_Container">
-        <p class="loss_Score"></p>
-      </div>
-    </div>
-  </section>
+<!-- Row 4 -->
+   <!-- Guesses -->
+     <div class = "guesses_Section">
+       <!-- Container containing the letter -->
+       <div class="letter_Guesses_Container">
+       <!-- Has Padding and a Lower Border -->
+         <p class ="lette_Guesses"></p>
+       </div>
+     </div>
+       <!-- Lower Container -->
 
-  <!-- Gif Image -->
-  <section id="gif_Section">
-    <img src="Assets/Img/johnsnow.gif" alt="Game of Thrones" class = "changing_Gifs">
-  </section>
-</body>
+    </section>
+  </body>
 </html>

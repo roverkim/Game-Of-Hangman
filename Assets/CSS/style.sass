@@ -14,18 +14,28 @@
   justify-self: center
   align-self: center
 
+@mixin background_image
+  background-repeat: no-repeat
+  background-size: cover
+
+@mixin table_Border
+  display: grid
+  height: 80%
+  padding: 8px
+  @include grid($columns: 1fr, $rows: 0.2fr 5fr 0.2fr 5fr, $area: "title_Hangman" "top_Img" "title_Reaction" "bottom_Img")
+  border: 1px solid black
+
+
 body
   display: grid
-  grid-template-columns: 0.5fr 8fr 0.5fr
-  grid-template-rows: 0.5fr 1fr 5fr 3fr 3fr 3fr 5fr 0.5fr
-  grid-template-areas: ". . ." ". header ." ". hangman . " ". guessed ." ". guesses ." ". scores ." ". gif_Section . "
-  grid-row-gap: 32px
+  grid-template-columns: 0.5fr 4fr 4fr 0.5fr
+  grid-template-rows: 0.1fr 1fr 5fr 0.1fr
+  grid-template-areas: ". . . ." ". header header ." ". left_Column right_Column  . " ". . . ."
   height: 100vh
   width: 100wh
   background: url(../Img/snow.gif)
   background-repeat: no-repeat
   background-size: cover
-
 
   #header
     grid-area: header
@@ -35,51 +45,92 @@ body
       @include vertical_center_line
       height: auto
 
-
-
-  #hangman
-    grid-area: hangman
-    display: grid
-    @include grid($columns: 1fr 1fr, $rows: 1fr, $area: "top_Img_Left top_Img_Right")
-    border: 1px solid black
-
-    .top_Img_Left
-      display: grid
-      grid-area: top_Img_Left
-      border-right: 1px solid black
-      .hangman_Img
-        height: 100%
-        width: auto
+  #left_Column
+    grid-area: left_Column
+    height: 100%
+    #hangman
+      grid-area: hangman
+      @include table_Border
+      .title_Hangman
+        grid-area: title_Hangman
+        border-bottom: 1px black solid
         @include vertical_center_line
-
-    .top_Img_Right
-      display: grid
-      grid-area: top_Img_Right
-      .guesses_Img
+      .title_Reaction
+        grid-area: title_Reaction
+        border-bottom: 1px black solid
         @include vertical_center_line
-        height: 100%
-        width: auto
+      .top_Img
+        grid-area: top_Img
+        background: url("../Img/tumble_weed.gif")
+        @include background_image
+        @include vertical_center_line
+        border: 1px solid white
+        width: 40%
+        height: 80%
+      .bottom_Img
+        grid-area: bottom_Img
+        background: url("../Img/gotOpening.gif")
+        @include background_image
+        @include vertical_center_line
+        border: 1px solid white
+        width: 40%
+        height: 80%
+
+  #right_Column
+    grid-area: right_Column
+    @include table_Border
+    @include grid($columns: 1fr, $rows: 1fr 2fr 1fr 1fr, $area: "scores_Section" "hints_Section" "guessed_Section" "guesses_Section")
+    #scores_Section
+      grid-area: scores_Section
+      border: 1px solid black
+    #hints_Section
+      grid-area: hints_Section
+      border: 1px solid black
+    #guessed_Section
+      grid-area: guessed_Section
+      border: 1px solid black
+      display: grid
+      .guessed_Container
+        height: 70%
+        width: 5%
+        border: 1px black solid
+        margin: 10px
+        position: relative
+        display: grid
+        @include vertical_center_line
+        .letters_Guessed
+          border-bottom: 1px white solid
+          margin-bottom: 0
+          position: absolute
+          bottom: 8px
+          width: 50%
+          text-align: center
+          @include vertical_center_line
+    #guesses_Section
+      grid-area: guesses_Section
+      border: 1px solid black
 
 
-  #guessed
-    grid-area: guessed
-    border: 1px solid black
-    .guessed_Container
-      height: 70%
-      width: 5%
-      border: 1px black solid
-      margin: 10px
-  #guesses
-    grid-area: guesses
-    border: 1px solid black
-  #scores
-    grid-area: scores
-    border: 1px solid black
-  #gif_Section
-    grid-area: gif_Section
-    border: 1px solid black
-    display: grid
-    .changing_Gifs
-      height: auto
-      width: auto
-      @include vertical_center_line
+
+    // #guessed
+    //   grid-area: guessed
+    //   border: 1px solid black
+    //   .guessed_Container
+    //     height: 70%
+    //     width: 5%
+    //     border: 1px black solid
+    //     margin: 10px
+    // #guesses
+    //   grid-area: guesses
+    //   border: 1px solid black
+    // #scores
+    //   grid-area: scores
+    //   border: 1px solid black
+    // #gif_Section
+    //   grid-area: gif_Section
+    //   border: 1px solid black
+    //   display: grid
+    //   .changing_Gifs
+    //     height: auto
+    //     width: auto
+    //     @include vertical_center_line
