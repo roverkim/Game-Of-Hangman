@@ -7,6 +7,7 @@
   <title>Hangman Game</title>
   <link rel="stylesheet" href="Assets/CSS/style.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src = "Assets/Scripts/javascript.js"></script>
 </head>
 <body>
   <!-- Hangman Images -->
@@ -43,13 +44,15 @@
 
 <!-- Row 2 -->
     <!-- Hints -->
-    <div class = "hints_Section">
+    <div id = "hints_Section">
        <!-- Contianer containing the hints -->
-       <div class="hints_Container">
         <!-- Hint Phrases -->
-         <p class = "hints"></p>
-         <img src="Assets/Img/johnsnow.gif" alt="Game of Thrones" class = "changing_Gifs">
+         <div class = "hints"> Hints: <div class="hints_Sentence">
+
+         </div>
        </div>
+
+         <img src="Assets/Img/johnsnow.gif" alt="Game of Thrones" class = "changing_Gifs">
     </div>
 
 <!-- Row 3 -->
@@ -64,11 +67,11 @@
 
 <!-- Row 4 -->
    <!-- Guesses -->
-     <div class = "guesses_Section">
+     <div id = "guesses_Section">
        <!-- Container containing the letter -->
        <div class="letter_Guesses_Container">
        <!-- Has Padding and a Lower Border -->
-         <p class ="lette_Guesses"></p>
+         <p class ="letter_Guesses"></p>
        </div>
      </div>
        <!-- Lower Container -->

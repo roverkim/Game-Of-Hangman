@@ -4,6 +4,35 @@
   font-size: 100%;
   line-height: 1; }
 
+.letters_Guessed {
+  border-bottom: 1px white solid;
+  margin-bottom: 0;
+  position: absolute;
+  bottom: 8px;
+  width: 50%;
+  text-align: center;
+  justify-self: center;
+  align-self: center; }
+
+.guessed_Container {
+  height: 70%;
+  width: 5%;
+  border: 1px black solid;
+  margin: 10px;
+  position: relative;
+  display: grid;
+  justify-self: center;
+  align-self: center; }
+  .guessed_Container .letter {
+    width: 30px;
+    height: 30px;
+    border-style: solid;
+    padding: 2px;
+    float: left;
+    margin: 2px; }
+  .guessed_Container .letter-button-color {
+    color: darkcyan; }
+
 body {
   display: grid;
   grid-template-columns: 0.5fr 4fr 4fr 0.5fr;
@@ -81,7 +110,24 @@ body {
       border: 1px solid black; }
     body #right_Column #hints_Section {
       grid-area: hints_Section;
-      border: 1px solid black; }
+      border: 1px solid black;
+      display: grid;
+      display: grid;
+      height: 80%;
+      padding: 8px;
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.2fr 5fr 0.2fr 5fr;
+      grid-template-areas: "title_Hangman" "top_Img" "title_Reaction" "bottom_Img";
+      border: 1px solid black;
+      grid-template-columns: 5fr 6fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: "changing_Gifs hints"; }
+      body #right_Column #hints_Section .changing_Gifs {
+        grid-area: changing_Gifs;
+        width: 100%;
+        height: auto; }
+      body #right_Column #hints_Section .hints {
+        grid-area: hints; }
     body #right_Column #guessed_Section {
       grid-area: guessed_Section;
       border: 1px solid black;
