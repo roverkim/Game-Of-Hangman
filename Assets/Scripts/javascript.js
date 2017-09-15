@@ -1,68 +1,96 @@
 
 $( document ).ready(function(){
 
-//Key Map
-var keyMap = {
-  65: "a",
-  66: "b",
-  67: "c",
-  68: "d",
-  69: "e",
-  70: "f",
-  71: "g",
-  72: "h",
-  73: "i",
-  74: "j",
-  75: "k",
-  76: "l",
-  77: "m",
-  78: "n",
-  79: "o",
-  80: "p",
-  81: "q",
-  82: "r",
-  83: "s",
-  84: "t",
-  85: "u",
-  86: "v",
-  87: "w",
-  88: "x",
-  89: "y",
-  90: "z"
-};
 
-//Key Array
-var keysPressed = [];
-
-
-
-
-
-
-  // Game of thrones word list object
-  var wordList = {firstWord: {word: "crow", hint: "a derogatory nickname given to the Night's Watch"},
-  secondWord: {word: "khaleesi", hint: "word referring to the wife of a warlord" },
-  thirdWord: {word: "maester", hint: "someone who focuses on scientific knowledge"}
+  // Game of thrones word list object with hints and images
+  var wordList = {firstWord: {word: "crow", hint: "A derogatory nickname given to the Night's Watch", img:"Assets/Img/johnsnow.gif"},
+  secondWord: {word: "khaleesi", hint: "Word referring to the wife of a warlord", img: "Assets/Img/daenerys.gif" },
+  thirdWord: {word: "maester", hint: "Someone who focuses on scientific knowledge", img: "Assets/Img/maester.gif"}
   };
 
-  // Loop and print out objects
-  // Object.keys(wordList).forEach(function(key,index) {
-  //     console.log(key + "index");
-  // });
 
-  //Function for choosing random words
+var handmanStorageImg = ["Assets/Img/hangman6.PNG", "Assets/Img/hangman5.PNG", "Assets/Img/hangman4.PNG", "Assets/Img/hangman3.PNG", "Assets/Img/hangman2.PNG", "Assets/Img/hangman1.PNG", "Assets/Img/hangman0.PNG"];
 
-  (function choose(){
-    // Stores random property object in word
-    var randomWord = Object.keys(wordList)[Math.floor(Math.random()*Object.keys(wordList).length)];
-    //stores the word from randomWord Object
-    var word = wordList[randomWord].word;
+var good_Gifs={
+  good1:"Assets/Img/good1.gif ",
+  good2:"Assets/Img/good2.gif ",
+  good3:"Assets/Img/good3.gif ",
+  good4:"Assets/Img/good4.gif ",
 
-    for (var i = 0; i < word.length; i++){
+};
 
-    };
+var bad_Gifs={
+  good1:"Assets/Img/bad1.gif ",
+  good2:"Assets/Img/bad2.gif ",
+  good3:"Assets/Img/bad3.gif ",
+  good4:"Assets/Img/bad4.gif ",
+
+};
 
 
+
+////////////////////////////////////////
+//Number of Lifes / Guesses
+var life = 7;
+//Number of Wins
+var win = 0;
+//Number of Losses
+var losses =0
+// Store Random Word
+var word = choose();
+//Store Key pressed
+var keyPressed =[];
+//Store letters Guessed
+var lettersGuessed = [];
+
+//Counter
+var counter = 0;
+
+//////////////////////////////////////////////
+
+//If statements to restart the game
+//Game Reset
+function reset(){
+  life = 7;
+  $("[data-hint]").remove();
+  $("[data-letter]").remove();
+  $(".hangman_Title_Image").attr("src", "Assets/Img/tumble_weed.gif");
+  keyPressed =[];
+  lettersGuessed = [];
+    choose();
+}
+
+
+//Function for choosing random words and displaying hints
+function choose(){
+  $(".wins_Score").html("Wins: "+ win)
+  $(".loss_Score").html("Losses: " + losses);
+  $(".life_Score").html("Number of Lifes: " + life );
+  // Stores random property object in word
+  var randomWord = Object.keys(wordList)[Math.floor(Math.random()*Object.keys(wordList).length)];
+  //stores the word from randomWord Object
+  var word = wordList[randomWord].word;
+  //Stores and Displays hint
+  (function(){
+    var hint = wordList[randomWord].hint;
+    var hints = $("<div>"+hint+"</div>");
+    $(hints).addClass("hints_Sentence");
+    $(hints).attr("data-hint", hint);
+    $(hints).text( hint);
+    $(".hints_Sentence").append(hints);
+  }());
+  // //Displays image based on word
+  // (function(){
+  // var images = wordList[randomWord].img;
+  // $(".changing_Gifs").attr(src, images)
+  // }());
+  (function(){
+    var images = wordList[randomWord].img;
+    $(".changing_Gifs").attr("src", images)
+  }());
+
+  // Function to print hidden word
+  (function hidden_word(){
     //Loop through word to get number of letters
     for (var i = 0; i < word.length; i++){
       // Inside the loop...
@@ -75,95 +103,90 @@ var keysPressed = [];
       // 5. Then give each "letterBtn" a text equal to "letters[i]".
       $(letterBtn).text("?");
       // 6. Finally, append each "letterBtn" to the "#buttons" div (provided).
-      $(".letter_Guesses_Container").append(letterBtn);
-    };
-
-    //stores the hint from randomWord Object and displays it
-    (function(){
-      var hint = wordList[randomWord].hint;
-      var hints = $("<div>"+hint+"</div>");
-      $(hints).addClass("hints_Sentence");
-      $(hints).attr("data-hint", hint);
-      $(hints).text( hint);
-      $(".hints_Sentence").append(hints);
-    }());
-
-return word;
+      $(".letter_Guesses").append(letterBtn).addClass("animated bounceInDown");
+    }
   }());
 
+  return word;
+};
 
-
-
-//Event Listener
 
 
 //Event Listener to check word
-
-
-
 document.addEventListener("keyup", function (e) {
-  if(e.which > 64 && e.which < 91){
-    $("#scores_Section").text("You pressed: " + keyMap[e.which]);
-  } else {
-    $("#results").text("Key not recognized");
-  };
-  var inputLetter = e.which;
-  if (inputLetter !== 9){
-    var letter = keyMap[inputLetter];
-    console.log(keysPressed);
-    keysPressed.push(letter);
+  var inputLetterIndex = String.fromCharCode(e.which).toLowerCase();
+  //Checks to see if leter typed is
+  if (word.indexOf(inputLetterIndex) !== -1){
+    if(keyPressed.indexOf(inputLetterIndex) !== -1){
+      $("#lower_Message").html("This Character has already been guessed!");
+    }
+    else{
+      //Replaces ? with letter
+      $("#lower_Message").html("Character Guessed!");
+      $("[data-letter=\"" + inputLetterIndex + "\"]").text(inputLetterIndex);
+      // Loop to get index of repeated characters
+      for(var i =0; i < word.length; i++){
+        if (word[i] == inputLetterIndex){
+          var o = word.indexOf(inputLetterIndex);
+          keyPressed[o] = inputLetterIndex;
+        }
+        for (y =0; y < word.length; y++){
+          if (word[y] == inputLetterIndex){
+            keyPressed[y] = inputLetterIndex;
+          }
+        }
+      }
+      if(word == keyPressed.join("")){
+        $("#lower_Message").html("You Win! :)");
+        win++;
+        $(".wins_Score").html("Wins: "+win);
+        reset();
+      }
 
-    for (var i = 0; i < keysPressed.length; i++ ){
-    };
+    }
+  }
+  // Takes away a life for wrong guess
+  else{
+    life -= 1;
+    counter++;
+    $(".hangman_Title_Image").attr("src", handmanStorageImg[life]).addClass("animated bounceInDown");
+    $("#lower_Message").html("Wrong Character. Guess again! " +life+ " lives remaining.");
+    $(".life_Score").html("Number of Lifes: " + life );
+    //Checks to see if character has been stored in the array
+    if (lettersGuessed.indexOf(inputLetterIndex) == -1){
+      //If it has been stored, do nothing
+      if (lettersGuessed[i] == inputLetterIndex){
+      }
+      //Push the character into the array and print the Character out.
+      else{
+        lettersGuessed.push(inputLetterIndex);
+        var letterBtn = $("<button>");
+        // 3. Then give each "letterBtn" the following classes: "letter-button" "letter" "letter-button-color".
+        $(letterBtn).addClass("letter-button red_letter red_letter-button-color");
+        // 4. Then give each "letterBtn" a data-attribute called "data-letter", with a value eqaual to "letters[i]"
+        $(letterBtn).attr("data-letter", inputLetterIndex );
+        // 5. Then give each "letterBtn" a text equal to "letters[i]".
+        $(letterBtn).text(inputLetterIndex);
+        // 6. Finally, append each "letterBtn" to the "#buttons" div (provided).
+        $(".to_Append").append(letterBtn).addClass("animated bounceInDown");
+        }
+      }
 
-  };
+        }
 
+  if (life == 0){
+    $("#lower_Message").html("You lose :( ");
+    losses++;
+    $(".loss_Score").html("Losses: " + losses);
+    reset();
+  }
 
-  // keysPressed.forEach(function(i){
-  //     if(letter !== i){
-  //       keysPressed.push(letter)
-  //       console.log(keysPressed);
-  //     }
-  //     else{
-  //     $("#scores_Section").text("You have already guessed: " + letter);
-  //     }
-  //   });
-  // };
 
 });
 
 
 
+// Win, Loss and Reset
 
-
-
-  //
-  // //Loop through word to get number of letters
-  // for (var i = 0; i < word.length; i++){
-  //   // Inside the loop...
-  //   // 2. Create a variable named "letterBtn" equal to $("<button>");
-  //   var letterBtn = $("<button>");
-  //   // 3. Then give each "letterBtn" the following classes: "letter-button" "letter" "letter-button-color".
-  //   $(letterBtn).addClass("letter-button letter letter-button-color");
-  //   // 4. Then give each "letterBtn" a data-attribute called "data-letter", with a value eqaual to "letters[i]"
-  //   $(letterBtn).attr("data-letter", word[i]);
-  //   // 5. Then give each "letterBtn" a text equal to "letters[i]".
-  //   $(letterBtn).text(word[i]);
-  //   // 6. Finally, append each "letterBtn" to the "#buttons" div (provided).
-  //   $(".letter_Guesses_Container").append(letterBtn);
-  // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// End of $(document).ready()
 });

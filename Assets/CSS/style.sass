@@ -1,8 +1,12 @@
 *
   padding: 0
   margin: 0
-  font-size: 100%
+  font-size: 2vh
   line-height: 1
+  color: white
+
+p
+  margin: 0
 
 @mixin grid ($columns, $rows, $area)
   grid-template-columns: $columns
@@ -17,13 +21,6 @@
 @mixin background_image
   background-repeat: no-repeat
   background-size: cover
-
-@mixin table_Border
-  display: grid
-  height: 80%
-  padding: 8px
-  @include grid($columns: 1fr, $rows: 0.2fr 5fr 0.2fr 5fr, $area: "title_Hangman" "top_Img" "title_Reaction" "bottom_Img")
-  border: 1px solid black
 
 // Reuse Classes
 .letters_Guessed
@@ -44,24 +41,37 @@
   display: grid
   @include vertical_center_line
 
-  .letter
-    width: 30px
-    height: 30px
-    border-style: solid
-    padding: 2px
-    float: left
-    margin: 2px
+.letter
+  width: 30px
+  height: 60%
+  border-style: solid
+  padding: 2px
+  float: left
+  margin: 0 auto
+  margin-right: 10px
+  margin-top: 10px
+
+.red_letter
+  width: 30px
+  height: 60%
+  border-style: solid
+  padding: 2px
+  float: left
+  margin: 0 auto
+  margin-right: 10px
+  margin-top: 10px
+
+.red_letter-button-color
+  color: darkcyan
 
 
-  .letter-button-color
-    color: darkcyan
-
-
+.letter-button-color
+  color: darkcyan
 
 
 body
   display: grid
-  grid-template-columns: 0.5fr 4fr 4fr 0.5fr
+  grid-template-columns: 0.5fr 3fr 4fr 0.5fr
   grid-template-rows: 0.1fr 1fr 5fr 0.1fr
   grid-template-areas: ". . . ." ". header header ." ". left_Column right_Column  . " ". . . ."
   height: 100vh
@@ -69,7 +79,7 @@ body
   background: url(../Img/snow.gif)
   background-repeat: no-repeat
   background-size: cover
-
+  grid-column-gap: 20px
   #header
     grid-area: header
     display: grid
@@ -77,13 +87,19 @@ body
     .header_Img
       @include vertical_center_line
       height: auto
-
   #left_Column
     grid-area: left_Column
-    height: 100%
+    height: 80%
+    border: 1px solid black
+    background: url(../Img/left_background.gif)
+    background-repeat: no-repeat
+    background-size: cover
     #hangman
+      @include grid($columns: 1fr, $rows: 0.2fr 5fr 0.2fr 5fr, $area: "title_Hangman" "top_Img" "title_Reaction" "bottom_Img")
       grid-area: hangman
-      @include table_Border
+      display: grid
+      height: 100%
+      padding: 8px
       .title_Hangman
         grid-area: title_Hangman
         border-bottom: 1px black solid
@@ -94,90 +110,130 @@ body
         @include vertical_center_line
       .top_Img
         grid-area: top_Img
-        background: url("../Img/tumble_weed.gif")
         @include background_image
         @include vertical_center_line
         border: 1px solid white
-        width: 40%
         height: 80%
+        display: grid
+        max-width: 245px
+        max-height: 212px
+        @include grid($columns: 1fr, $rows: 1fr, $area: "hangman_Title_Image")
+        .hangman_Title_Image
+          grid-area: hangman_Title_Image
+          width: 100%
+          max-width: 245px
+          height: 100%
       .bottom_Img
-        grid-area: bottom_Img
-        background: url("../Img/gotOpening.gif")
         @include background_image
         @include vertical_center_line
         border: 1px solid white
-        width: 40%
         height: 80%
+        max-width: 245px
+        display: grid
+        @include grid($columns: 1fr, $rows: 1fr, $area: "hangman_Bottom_Image")
+        .hangman_Bottom_Image
+          grid-area: hangman_Bottom_Image
+          width: 100%
+          max-width: 245px
+          height: 100%
 
+
+
+  //Left Section
   #right_Column
     grid-area: right_Column
-    @include table_Border
-    @include grid($columns: 1fr, $rows: 1fr 2fr 1fr 1fr, $area: "scores_Section" "hints_Section" "guessed_Section" "guesses_Section")
+    display: grid
+    @include grid($columns: 2fr, $rows: 2fr 1fr 1fr 1fr 5fr, $area: "scores_Section" "hints_Section" "guessed_Section" "guesses_Section" "hint_Image_Section")
+    height: 80%
+    border: 1px solid black
+    background: url(../Img/right_background.gif)
+    background-repeat: no-repeat
+    background-size: cover
+    // Scores Section
     #scores_Section
       grid-area: scores_Section
       border: 1px solid black
+      display: grid
+      @include grid($columns: 1fr, $rows: 1.5fr 1fr, $area: "upper_Scores" "lower_Message")
+      .upper_Scores
+        grid-area: upper_Scores
+        display: grid
+        @include grid($columns: 1fr 1fr 1fr, $rows: 1fr, $area: "wins_Container loss_Container life_Container")
+        .wins_Container
+          grid-area: wins_Container
+          border: 1px solid black
+          height: 100%
+          display: grid
+          .wins_Score
+            @include vertical_center_line
+        .loss_Container
+          grid-area: loss_Container
+          border: 1px solid black
+          height: 100%
+          display: grid
+          .loss_Score
+            @include vertical_center_line
+        .life_Container
+          grid-area: life_Container
+          border: 1px solid black
+          height: 100%
+          display: grid
+          .life_Score
+            @include vertical_center_line
+      #lower_Message
+        grid-area: lower_Message
+        @include vertical_center_line
+    //Hints Section
     #hints_Section
       grid-area: hints_Section
       border: 1px solid black
       display: grid
-      @include table_Border
-      grid-template-columns: 5fr 6fr
+      height: 80%
+      padding: 8px
+      border: 1px solid black
+      grid-template-columns: 1fr
       grid-template-rows: 1fr
-      grid-template-areas: "changing_Gifs hints"
-      .changing_Gifs
-        grid-area: changing_Gifs
-        width: 100%
-        height: auto
+      grid-template-areas: "hints"
       .hints
         grid-area: hints
+        display: grid
+        @include vertical_center_line
+        text-align: center
+        display: grid
+        .hints_Sentence
+          padding: 5px
+          @include vertical_center_line
 
-    //work on hints
-
+    // Guessed Letters Section
     #guessed_Section
       grid-area: guessed_Section
       border: 1px solid black
       display: grid
-      .guessed_Container
-        height: 70%
-        width: 5%
-        border: 1px black solid
-        margin: 10px
-        position: relative
-        display: grid
+      .center
+        width: 80%
+        height: 100%
         @include vertical_center_line
-        .letters_Guessed
-          border-bottom: 1px white solid
-          margin-bottom: 0
-          position: absolute
-          bottom: 8px
-          width: 50%
-          text-align: center
+        border: 1px solid black
+        display:  grid
+        .to_Append
           @include vertical_center_line
+
+    // Letters to be guessed Section
     #guesses_Section
+      display: grid
       grid-area: guesses_Section
-      border: 1px solid black
+      .letter_Guesses_Container
+        @include vertical_center_line
+        padding: 10px
 
-
-
-    // #guessed
-    //   grid-area: guessed
-    //   border: 1px solid black
-    //   .guessed_Container
-    //     height: 70%
-    //     width: 5%
-    //     border: 1px black solid
-    //     margin: 10px
-    // #guesses
-    //   grid-area: guesses
-    //   border: 1px solid black
-    // #scores
-    //   grid-area: scores
-    //   border: 1px solid black
-    // #gif_Section
-    //   grid-area: gif_Section
-    //   border: 1px solid black
-    //   display: grid
-    //   .changing_Gifs
-    //     height: auto
-    //     width: auto
-    //     @include vertical_center_line
+    #hint_Image_Section
+      grid-area: hint_Image_Section
+      @include grid($columns: 1fr, $rows: 1fr, $area: "changing_Gifs")
+      display: grid
+      height: auto
+      .changing_Gifs
+        grid-area: changing_Gifs
+        width: 50%
+        height: auto
+        max-height: 524.875px
+        @include vertical_center_line

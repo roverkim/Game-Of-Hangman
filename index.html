@@ -5,11 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Hangman Game</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
   <link rel="stylesheet" href="Assets/CSS/style.min.css">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script type="text/javascript" src = "Assets/Scripts/javascript.js"></script>
 </head>
 <body>
+ <!-- Sound -->
+  <audio autoplay loop>
+   <source src="Assets/Audio/GOT.mp3" type="audio/mpeg">
+  </audio>
+
+
+
   <!-- Hangman Images -->
   <!-- Header -->
   <section id = "header">  <img src="Assets/Img/Logo.png" alt="Logo" class="header_Img" > </section>
@@ -19,10 +28,10 @@
     <div id="hangman">
       <!-- Changing Hangman Image Left -->
       <p class = "title_Hangman"> Hangman </p>
-      <div class = "top_Img" ></div>
+      <div class = "top_Img" ><img src="Assets/Img/tumble_weed.gif" alt="tumble_weed" class = "hangman_Title_Image "></div>
       <!-- Changing Image of Guesses Right -->
       <p class = "title_Reaction"> Reactions </p>
-      <div class = "bottom_Img" > </div>
+      <div class = "bottom_Img" ><img src="Assets/Img/gotOpening.gif" alt="tumble_weed" class = "hangman_Bottom_Image"></div>
     </div>
   </section>
 
@@ -32,14 +41,22 @@
 <!-- Row 1 -->
     <!-- Win and Losses -->
     <div id ="scores_Section">
-      <!-- Wins to the left -->
-        <div class="wins_Container">
-          <p class="wins_Score"></p>
-        </div>
-      <!-- loss to the right -->
-        <div class="loss_Container">
-          <p class="loss_Score"></p>
-        </div>
+      <div class ="upper_Scores">
+        <!-- Wins-->
+          <div class="wins_Container">
+            <p class="wins_Score"></p>
+          </div>
+        <!-- loss -->
+          <div class="loss_Container">
+            <p class="loss_Score"></p>
+          </div>
+          <!-- lifes -->
+            <div class="life_Container">
+              <p class="life_Score"></p>
+            </div>
+      </div>
+
+        <div id = "lower_Message"></div>
     </div>
 
 <!-- Row 2 -->
@@ -47,21 +64,19 @@
     <div id = "hints_Section">
        <!-- Contianer containing the hints -->
         <!-- Hint Phrases -->
-         <div class = "hints"> Hints: <div class="hints_Sentence">
-
+         <div class = "hints"> <span style = "border-bottom: black solid 1px;">Hint</span>
+          <div class="hints_Sentence">
          </div>
        </div>
-
-         <img src="Assets/Img/johnsnow.gif" alt="Game of Thrones" class = "changing_Gifs">
     </div>
 
 <!-- Row 3 -->
   <!-- Letters Guessed  -->
     <div id="guessed_Section">
        <!-- Letter Guesses -->
-      <div class="guessed_Container">
+      <div class = "center">
          <!-- Has Padding and a Lower Border -->
-        <p class = "letters_Guessed">A</p>
+        <p class = "to_Append"></p>
       </div>
      </div>
 
@@ -74,7 +89,10 @@
          <p class ="letter_Guesses"></p>
        </div>
      </div>
-       <!-- Lower Container -->
+       <!-- Hint Image -->
+       <div id = "hint_Image_Section">
+          <img src="Assets/Img/handpeople.jpg" alt="Game of Thrones" class = "changing_Gifs">
+       </div>
 
     </section>
   </body>
