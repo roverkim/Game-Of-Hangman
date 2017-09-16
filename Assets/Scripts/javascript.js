@@ -25,7 +25,7 @@ var bad_Gifs={
   good2:"Assets/Img/bad2.gif ",
   good3:"Assets/Img/bad3.gif ",
   good4:"Assets/Img/bad4.gif ",
-  good5:"Assets/Img/bad4.gif ",
+  good5:"Assets/Img/bad5.gif ",
 
 };
 
