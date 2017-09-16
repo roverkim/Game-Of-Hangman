@@ -122,7 +122,6 @@ function choose(){
 
 };
 
-prompt()
 //Event Listener to check word
 document.addEventListener("keyup", function (e) {
   $(".header_Img, #left_Column, #right_Column").removeClass("animated shake");
