@@ -78,7 +78,7 @@ choose();
 function choose(){
   $(".wins_Score").html("Wins: "+ win)
   $(".loss_Score").html("Losses: " + losses);
-  $(".life_Score").html("Number of Lifes: " + life );
+  $(".life_Score").html("Lifes: " + life );
   // Stores random property object in word
   var randomWord = Object.keys(wordList)[Math.floor(Math.random()*Object.keys(wordList).length)];
   //stores the word from randomWord Object
@@ -122,7 +122,7 @@ function choose(){
 
 };
 
-
+prompt()
 //Event Listener to check word
 document.addEventListener("keyup", function (e) {
   $(".header_Img, #left_Column, #right_Column").removeClass("animated shake");

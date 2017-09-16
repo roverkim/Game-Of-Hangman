@@ -285,7 +285,7 @@ body {
       grid-template-rows: 1fr 1fr 1fr 1fr 2fr 1fr;
       grid-template-areas: "scores_Section" "hints_Section" "guessed_Section" "guesses_Section" "hint_Image_Section" ".";
       height: auto;
-      border: 1px solid black;
+      border: 1px solid yellow;
       font-size: 12px; } }
 
 @media only screen and (max-width: 320px) {
