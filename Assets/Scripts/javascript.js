@@ -16,6 +16,7 @@ var good_Gifs={
   good2:"Assets/Img/good2.gif ",
   good3:"Assets/Img/good3.gif ",
   good4:"Assets/Img/good4.gif ",
+  good5:"Assets/Img/good5.gif ",
 
 };
 
@@ -24,6 +25,7 @@ var bad_Gifs={
   good2:"Assets/Img/bad2.gif ",
   good3:"Assets/Img/bad3.gif ",
   good4:"Assets/Img/bad4.gif ",
+  good5:"Assets/Img/bad4.gif ",
 
 };
 
@@ -36,15 +38,14 @@ var life = 7;
 var win = 0;
 //Number of Losses
 var losses =0
-// Store Random Word
-var word = choose();
 //Store Key pressed
 var keyPressed =[];
 //Store letters Guessed
 var lettersGuessed = [];
-
 //Counter
 var counter = 0;
+// Store Random Word
+var word ;
 
 //////////////////////////////////////////////
 
@@ -55,10 +56,15 @@ function reset(){
   $("[data-hint]").remove();
   $("[data-letter]").remove();
   $(".hangman_Title_Image").attr("src", "Assets/Img/tumble_weed.gif");
+  $(".hangman_Bottom_Image").attr("src", "Assets/Img/gotOpening.gif");
+  $(".header_Img, #left_Column, #right_Column").addClass("animated shake");
   keyPressed =[];
   lettersGuessed = [];
-    choose();
+  choose();
 }
+
+//Execute Choose Word
+choose();
 
 
 //Function for choosing random words and displaying hints
@@ -69,7 +75,7 @@ function choose(){
   // Stores random property object in word
   var randomWord = Object.keys(wordList)[Math.floor(Math.random()*Object.keys(wordList).length)];
   //stores the word from randomWord Object
-  var word = wordList[randomWord].word;
+  word = wordList[randomWord].word;
   //Stores and Displays hint
   (function(){
     var hint = wordList[randomWord].hint;
@@ -100,30 +106,39 @@ function choose(){
       $(letterBtn).addClass("letter-button letter letter-button-color");
       // 4. Then give each "letterBtn" a data-attribute called "data-letter", with a value eqaual to "letters[i]"
       $(letterBtn).attr("data-letter", word[i]);
-      // 5. Then give each "letterBtn" a text equal to "letters[i]".
+      // 5. Then give each "letterBtn" a text equal to "?".
       $(letterBtn).text("?");
       // 6. Finally, append each "letterBtn" to the "#buttons" div (provided).
       $(".letter_Guesses").append(letterBtn).addClass("animated bounceInDown");
     }
   }());
 
-  return word;
 };
-
 
 
 //Event Listener to check word
 document.addEventListener("keyup", function (e) {
+  $(".header_Img, #left_Column, #right_Column").removeClass("animated shake");
+  $("<button>").removeClass("animated bounceInDown");
+  console.log(word);
   var inputLetterIndex = String.fromCharCode(e.which).toLowerCase();
   //Checks to see if leter typed is
   if (word.indexOf(inputLetterIndex) !== -1){
     if(keyPressed.indexOf(inputLetterIndex) !== -1){
       $("#lower_Message").html("This Character has already been guessed!");
+      $("[data-letter=\"" + inputLetterIndex + "\"]").removeClass("animated bounceInDown shake");
+      $("[data-letter=\"" + inputLetterIndex + "\"]").addClass("animated shake");
     }
     else{
+      // Replace image with good image
+      var goodImageKey = Object.keys(good_Gifs)[Math.floor(Math.random()*Object.keys(good_Gifs).length)];
+      var randomGoodImage = good_Gifs[goodImageKey];
+      $(".hangman_Bottom_Image").attr("src", randomGoodImage)
+      //
       //Replaces ? with letter
       $("#lower_Message").html("Character Guessed!");
       $("[data-letter=\"" + inputLetterIndex + "\"]").text(inputLetterIndex);
+      $("[data-letter=\"" + inputLetterIndex + "\"]").addClass("animated bounceInDown");
       // Loop to get index of repeated characters
       for(var i =0; i < word.length; i++){
         if (word[i] == inputLetterIndex){
@@ -149,8 +164,13 @@ document.addEventListener("keyup", function (e) {
   else{
     life -= 1;
     counter++;
+    // Replace reactions with bad image
+    var badImageKey = Object.keys(bad_Gifs)[Math.floor(Math.random()*Object.keys(bad_Gifs).length)];
+    var randomBadImage = bad_Gifs[badImageKey];
+    $(".hangman_Bottom_Image").attr("src", randomBadImage)
+    //
     $(".hangman_Title_Image").attr("src", handmanStorageImg[life]).addClass("animated bounceInDown");
-    $("#lower_Message").html("Wrong Character. Guess again! " +life+ " lives remaining.");
+    $("#lower_Message").html("Wrong Character. Guess again! " + life + " lives remaining.");
     $(".life_Score").html("Number of Lifes: " + life );
     //Checks to see if character has been stored in the array
     if (lettersGuessed.indexOf(inputLetterIndex) == -1){
@@ -168,7 +188,8 @@ document.addEventListener("keyup", function (e) {
         // 5. Then give each "letterBtn" a text equal to "letters[i]".
         $(letterBtn).text(inputLetterIndex);
         // 6. Finally, append each "letterBtn" to the "#buttons" div (provided).
-        $(".to_Append").append(letterBtn).addClass("animated bounceInDown");
+        $(".to_Append").append(letterBtn);
+        $("[data-letter=\"" + inputLetterIndex + "\"]").addClass("animated bounceInDown");
         }
       }
 
