@@ -1,11 +1,18 @@
 
 $( document ).ready(function(){
 
+  document.body.style.zoom="90%";
+
 
   // Game of thrones word list object with hints and images
-  var wordList = {firstWord: {word: "crow", hint: "A derogatory nickname given to the Night's Watch", img:"Assets/Img/johnsnow.gif"},
-  secondWord: {word: "khaleesi", hint: "Word referring to the wife of a warlord", img: "Assets/Img/daenerys.gif" },
-  thirdWord: {word: "maester", hint: "Someone who focuses on scientific knowledge", img: "Assets/Img/maester.gif"}
+  var wordList = {firstWord: {word: "crow", hint: "A derogatory nickname given to the Night's Watch.", img:"Assets/Img/johnsnow.gif"},
+  secondWord: {word: "khaleesi", hint: "Word referring to the wife of a warlord.", img: "Assets/Img/daenerys.gif" },
+  thirdWord: {word: "maester", hint: "Someone who focuses on scientific knowledge.", img: "Assets/Img/maester.gif"},
+  forthWord:{word:"wildfire", hint:"Immune to water and that can only be extinguished by large amounts of sand.", img:"Assets/Img/wildfire.gif"},
+  fifthWord:{word:"wilding", hint:"Derogatory term for the Free Folk, people who live north of the Wall.", img:"Assets/Img/wildling.gif"},
+  sixthWord:{word:"valyrian", hint:"One of two things known to be able to kill a white walker.", img:"Assets/Img/valyrian.gif"},
+  seventhWord:{word:"unsullied", hint:"Eunuch slave soldiers.", img:"Assets/Img/unsullied.gif"},
+  eighthWord:{word:"raven", hint:"Used to deliver messages.", img:"Assets/Img/raven.gif"}
   };
 
 
@@ -103,7 +110,7 @@ function choose(){
       // 2. Create a variable named "letterBtn" equal to $("<button>");
       var letterBtn = $("<button>");
       // 3. Then give each "letterBtn" the following classes: "letter-button" "letter" "letter-button-color".
-      $(letterBtn).addClass("letter-button letter letter-button-color");
+      $(letterBtn).addClass("letter-button letter letter-button-color center");
       // 4. Then give each "letterBtn" a data-attribute called "data-letter", with a value eqaual to "letters[i]"
       $(letterBtn).attr("data-letter", word[i]);
       // 5. Then give each "letterBtn" a text equal to "?".

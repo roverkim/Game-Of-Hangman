@@ -22,6 +22,11 @@ p
   background-repeat: no-repeat
   background-size: cover
 
+
+.center
+  justify-self: center
+  align-self: center
+
 // Reuse Classes
 .letters_Guessed
   border-bottom: 1px white solid
@@ -47,9 +52,7 @@ p
   border-style: solid
   padding: 2px
   float: left
-  margin: 0 auto
-  margin-right: 10px
-  margin-top: 10px
+  margin: 5px
 
 .red_letter
   width: 30px
@@ -57,12 +60,11 @@ p
   border-style: solid
   padding: 2px
   float: left
-  margin: 0 auto
-  margin-right: 10px
-  margin-top: 10px
+  margin: 5px
+  background-color: red
 
 .red_letter-button-color
-  color: darkcyan
+  color: white
 
 
 .letter-button-color
@@ -87,13 +89,15 @@ body
     .header_Img
       @include vertical_center_line
       height: auto
+      width: auto
   #left_Column
     grid-area: left_Column
-    height: 80%
+    height: 80vh
     border: 1px solid black
     background: url(../Img/left_background.gif)
     background-repeat: no-repeat
     background-size: cover
+    border: 1px solid yellow
     #hangman
       @include grid($columns: 1fr, $rows: 0.2fr 5fr 0.2fr 5fr, $area: "title_Hangman" "top_Img" "title_Reaction" "bottom_Img")
       grid-area: hangman
@@ -144,11 +148,12 @@ body
     grid-area: right_Column
     display: grid
     @include grid($columns: 2fr, $rows: 2fr 1fr 1fr 1fr 5fr, $area: "scores_Section" "hints_Section" "guessed_Section" "guesses_Section" "hint_Image_Section")
-    height: 80%
+    height: 80vh
     border: 1px solid black
     background: url(../Img/right_background.gif)
     background-repeat: no-repeat
     background-size: cover
+    border: 1px solid yellow
     // Scores Section
     #scores_Section
       grid-area: scores_Section
@@ -225,6 +230,8 @@ body
       .letter_Guesses_Container
         @include vertical_center_line
         padding: 10px
+        .letter_Guesses
+          @include vertical_center_line
 
     #hint_Image_Section
       grid-area: hint_Image_Section
@@ -233,8 +240,67 @@ body
       height: auto
       .changing_Gifs
         grid-area: changing_Gifs
-        width: 50%
-        height: auto
+        // width: 50%
+        // height: auto
         max-height: 524.875px
         border: 1px white solid
         @include vertical_center_line
+
+
+@media only screen and (max-width: 740px)
+
+  .letter
+    width: 20px
+    height: auto
+    border-style: solid
+
+
+  .red_letter
+      width: 20px
+      height: auto
+      border-style: solid
+      padding: 2px
+
+
+  body
+    width: auto
+    height: auto
+    display: grid
+    @include grid ($columns: 0.1fr 1fr 0.1fr, $rows: 1fr 3fr 3fr 1fr, $area: ". header ." ". left_Column ." ". right_Column ." ". . .")
+    grid-column-gap: 10px
+    grid-row-gap: 10px
+    #left_Column
+      grid-area: left_Column
+      height: auto
+      #hangman
+        @include grid($columns: 1fr, $rows: 1fr 5fr 1fr 5fr, $area: "title_Hangman" "top_Img" "title_Reaction" "bottom_Img")
+        grid-area: hangman
+        display: grid
+        height: 100%
+
+      //Left Section
+    #right_Column
+      grid-area: right_Column
+      display: grid
+      @include grid($columns: 1fr, $rows: 1fr 1fr 1fr 1fr 2fr 1fr, $area: "scores_Section" "hints_Section" "guessed_Section" "guesses_Section" "hint_Image_Section" ".")
+      height: auto
+      border: 1px solid black
+      font-size: 12px
+      // Scores Section
+
+
+@media only screen and (max-width: 320px)
+
+  .letter
+    width: 15px
+    height: auto
+    border-style: solid
+    margin: 2px
+
+
+  .red_letter
+      width: 10px
+      height: auto
+      border-style: solid
+      padding: 2px
+      margin: 10px
