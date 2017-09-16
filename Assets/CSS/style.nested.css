@@ -220,7 +220,6 @@ body {
         height: 100%;
         justify-self: center;
         align-self: center;
-        border: 1px solid black;
         display: grid; }
         body #right_Column #guessed_Section .center .to_Append {
           justify-self: center;
